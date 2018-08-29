@@ -3,8 +3,8 @@ class Board
   attr_accessor :cups
 
   def initialize(name1, name2)
-    @player1 = Player.new(name1, 1)
-    @player2 = Player.new(name2, 2)
+    @name1 = name1
+    @name2 = name2
     @cups = Array.new(14) { [] }
     place_stones
   end
@@ -26,17 +26,21 @@ class Board
 
       (1..@cups[start_pos].length).each do |i|
 
-        new_position = ((start_pos + i) % 13)
+        new_position = ((start_pos + i) % 14)
 
-        if @player1.side == 2
-          if new_position < 7
-            new_position += 7
-          end
-        elsif @player1.side == 1
-          if new_position > 6
-            new_position -=7
-          end
+
+
+
+        if new_position == 13
+          @cups[new_position] += [:stone] if current_player_name = @name2
+        else
+            @cups[new_position] += [:stone]
         end
+      elsif current_player_name == @name1
+        if new_position
+          new_position -=7
+        end
+      end
 
         @cups[new_position] += [:stone]
       end
@@ -55,10 +59,10 @@ class Board
   def next_turn(ending_cup_idx)
     if ending_cup_idx == 6 || ending_cup_idx == 13
       :prompt
-    elsif @cups[ending_cup_idx].empty?
+    elsif @cups[ending_cup_idx].length == 1
       :switch
-    elsif @cups[ending_cup_idx].length > 1
-      return ending_cup_idx
+    else
+     ending_cup_idx
     end
     # helper method to determine whether #make_move returns :switch, :prompt, or ending_cup_idx
   end
