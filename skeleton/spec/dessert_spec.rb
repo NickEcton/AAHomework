@@ -60,7 +60,7 @@ describe Dessert do
   describe "#make_more" do
     let(:chef) { double('chef') }
     it "calls bake on the dessert's chef with the dessert passed in" do
-      expect(chef.bake("lemon")).to receive(:make_more).with("lemon")
+      expect(chef).to receive(:bake).with("lemon")
       subject.make_more
     end
   end
