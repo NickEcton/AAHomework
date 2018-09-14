@@ -1,0 +1,17 @@
+<h1 style='text-align: center'>Album Title: <%= @album.title %></h1>
+<br>
+<h3 style='text-align: center'>By: <%= (Band.find(@album.band_id)).name %></h3>
+
+<form action="<%= edit_album_url(@album) %>" method="get">
+  <input type="submit" name="" value="Edit Album">
+</form>
+
+<form action= "<%= album_url %>" method="post">
+  <input type="hidden" name="_method" value="Delete">
+  <%= auth_token %>
+  <input type="submit" name="" value="Delete Album">
+</form>
+
+<form action="<%= band_url(@album.band_id) %>" method="get">
+  <input type="submit" name="" value="Band">
+</form>

@@ -1,0 +1,10 @@
+<ul>
+  <% Band.all.each do |band| %>
+  <li> <a href= "<%= band_url(band.id) %>" ><%= band.name %> </a></li>
+  <br>
+  <% end %>
+</ul>
+<form action="<%= new_band_url %>" method="get">
+  <%= auth_token %>
+  <input type="submit" name="" value="Add a Band">
+</form>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MusicApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <header style="display: flex; justify-content: flex-end">
+    <% if logged_in? %>
+      <form style="" action="<%= session_url %>" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <%= auth_token %>
+        <input type="submit" value="LOG OUT!">
+      </form>
+    <% else %>
+      <form style="" action="<%= new_session_url %> " method="get">
+        <%= auth_token %>
+        <input type="submit" value="LOGIN PAGE">
+      </form>
+      <form action="<%= new_user_url %> " method="get">
+        <%= auth_token %>
+        <input type="submit" name="" value="SIGNUP PAGE!">
+      </form>
+    <% end %>
+
+
+  </header>
+  <h1 style= "color: blue; font-family: courier; text-align: center; font-size: 50px  ">SPINNERS DIGEST</h1>
+  <body>
+    <%= yield %>
+  </body>
+
+  
+</html>
